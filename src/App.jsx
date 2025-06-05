@@ -1,4 +1,3 @@
-import './App.css'
 import AuthPage from './pages/AuthPage.jsx'
 import HomePage from './pages/HomePage.jsx'
 // import { useState } from 'react'

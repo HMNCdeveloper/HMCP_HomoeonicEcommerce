@@ -7,7 +7,7 @@ function ProductCatalog() {
     { id: 4, name: 'Product 4', price: '$40' },
   ]
   return (
-    <div className='container mx-auto px-4 py-8'>
+    <div className='mx-auto px-4 py-8'>
       <h1 className='text-3xl font-bold mb-6'>Products Catalog</h1>
       <p className='mb-4'>Explore our wide range of products.</p>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
