@@ -42,7 +42,7 @@ function Header() {
           aria-label='Toggle menu'
           aria-expanded={isMenuOpen}
           aria-controls='mobile-menu'
-          className='md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-pink-600'
+          className='md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500'
         >
           <svg className='w-6 h-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
             {isMenuOpen ? (
@@ -57,7 +57,7 @@ function Header() {
                 strokeLinecap='round'
                 strokeLinejoin='round'
                 strokeWidth={2}
-                d='M6 18L18 6M6 6l12 12'
+                d='M4 6h16M4 12h16M4 18h16'
               />
             )}
           </svg>
@@ -66,7 +66,7 @@ function Header() {
         {isMenuOpen && (
           <aside
             id='mobile-menu'
-            className='md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg py-4 px-4'
+            className='md:hidden absolute top-24 left-0 right-0 bg-white shadow-lg py-4 px-4 '
             aria-label='Mobile menu'
           >
             <nav aria-label='Mobile navigation'>
