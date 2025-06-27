@@ -40,7 +40,7 @@ function Carousel() {
   }, [slides.length])
 
   return (
-    <div className=' h-[200px] sm:h-[300px] md:h-[400px] lg:h-[600px] w-full m-auto py-8 relative group'>
+    <div className=' h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] w-full m-auto py-8 relative group'>
       <img
         src={slides[currentIndex].img}
         alt={slides[currentIndex].title}

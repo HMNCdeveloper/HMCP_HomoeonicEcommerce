@@ -21,7 +21,8 @@ function Footer() {
       icon: <MdLocationOn className='text-white text-xl mt-1 mr-4 flex-shrink-0' />,
       content: (
         <a href='#' className='text-gray-400 font-bold hover:text-yellow-500 transition'>
-          Direccion Homoeonic, Ciudad, Pais
+          Baja California,
+          Mexico
         </a>
       ),
     },
@@ -29,7 +30,7 @@ function Footer() {
       icon: <MdPhone className='text-white text-xl mt-1 mr-4 flex-shrink-0' />,
       content: (
         <a href='#' className='text-gray-400 font-bold hover:text-yellow-500 transition'>
-          Numero de Telefono
+          Call us: +52-664-594-9244
         </a>
       ),
     },
@@ -45,7 +46,7 @@ function Footer() {
       icon: <MdEmail className='text-white text-xl mt-1 mr-4 flex-shrink-0' />,
       content: (
         <a href='#' className='text-gray-400 font-bold hover:text-yellow-500 transition'>
-          info@homoeonic.com
+          Email us: info@homoeonic.com
         </a>
       ),
     },
