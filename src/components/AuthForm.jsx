@@ -1,12 +1,12 @@
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
-function AuthForm({ isLogin, setIsLogin }) {
+function AuthForm({ isLogin, setIsLogin, onClose }) {
   return (
     <div>
       {isLogin ? (
-        <LoginForm isLogin={isLogin} setIsLogin={setIsLogin} />
+        <LoginForm isLogin={isLogin} setIsLogin={setIsLogin}  onClose={onClose}/>
       ) : (
-        <SignUpForm isLogin={isLogin} setIsLogin={setIsLogin} />
+        <SignUpForm isLogin={isLogin} setIsLogin={setIsLogin}  onClose={onClose}/>
       )}
     </div>
   )

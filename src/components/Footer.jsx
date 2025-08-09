@@ -1,5 +1,6 @@
 import { FaBuilding, FaFacebookF, FaInstagram, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 import { MdAccessTime, MdEmail, MdLocationOn, MdPhone } from 'react-icons/md'
+import { href } from 'react-router-dom'
 
 function Footer() {
   const socialLinks = [
@@ -14,6 +15,7 @@ function Footer() {
     { text: 'About Us', href: '#about' },
     { text: 'Our Services', href: '#services' },
     { text: 'Contact Us', href: '#contact' },
+    { text: 'Testimonials', href: '/testimonials' },
   ]
 
   const contactInfo = [
@@ -53,9 +55,10 @@ function Footer() {
   ]
 
   const legalLinks = [
-    { href: '#', text: 'Privacy Policy' },
-    { href: '#', text: 'Terms of Service' },
-    { href: '#', text: 'Cookie Policy' },
+    { href: '/privacidad', text: 'Privacy Policy' },
+    { href: '/terminos', text: 'Terms of Service' },
+    { href: '/aviso-legal', text: 'Legal Notice' },
+    { href: '/testomonials', text: 'Testimonials'}
   ]
 
   return (
