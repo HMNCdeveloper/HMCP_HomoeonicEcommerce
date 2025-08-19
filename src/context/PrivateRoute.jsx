@@ -1,21 +1,3 @@
-// import { Navigate } from 'react-router-dom';
-// import { useAuth } from './AuthContext.jsx';
-
-// function PrivateRoute({ children }) {
-//   const { user } = useAuth();
-//     console.log('PrivateRoute user:', user);
-//   if (!user) {
-//     // Si no hay usuario logueado, redirige a login
-//     return <Navigate to="/" replace />;
-//   }
-
-//   // Si hay usuario, renderiza los hijos (el componente protegido)
-//   return children;
-// }
-
-// export default PrivateRoute;
-
-
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -24,7 +6,7 @@ export default function PrivateRoute({ children }) {
 
 
   if (loading) {
-    // Mientras carga, muestra algo o nada (puede ser spinner)
+    // Mensaje de cargando
     return <div>Cargando...</div>;
   }
 

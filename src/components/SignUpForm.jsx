@@ -8,6 +8,7 @@ const RegisterForm = ({ isLogin, setIsLogin, onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { fetchNow, loading, error } = useFetch('', null, false);
   const { data, loading: loadingCities, error: errorCities } = useFetch('cities/');
+  const { data: dataCountry, loading: loadingCountry, error: errorCountry } = useFetch('countries/');       // se anadio para agregar country
   const [captchaValue, setCaptchaValue] = useState(null);
   const [showCaptcha, setShowCaptcha] = useState(false);
 
@@ -19,9 +20,11 @@ const RegisterForm = ({ isLogin, setIsLogin, onClose }) => {
     phone_number: '',
     street1: '',
     city: '',
+    country: '',       // se anadio para agregar country
     zip_code: '',
   });
 
+  
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
   };
@@ -86,6 +89,7 @@ const RegisterForm = ({ isLogin, setIsLogin, onClose }) => {
     if (!formData.phone_number.trim()) newErrors.phone_number = 'Phone number is required';
     if (!formData.street1.trim()) newErrors.street1 = 'Street is required';
     if (!formData.city.trim()) newErrors.city = 'City is required';
+    if (!formData.city.trim()) newErrors.city = 'Country is required';             // se anadio para anadir country
     if (!formData.zip_code.trim()) newErrors.zip_code = 'ZIP Code is required';
 
     if (Object.keys(newErrors).length > 0) {
@@ -100,6 +104,7 @@ const RegisterForm = ({ isLogin, setIsLogin, onClose }) => {
           street: formData.street1,
           // `${formData.street1}${formData.street2} ', ' + formData.street2 : ''}`,
           city: formData.city,
+          country: formData.country,         // Se agrego para anadir country
           zip_code: formData.zip_code,
         },
       ],
@@ -108,10 +113,12 @@ const RegisterForm = ({ isLogin, setIsLogin, onClose }) => {
 
     // Remove fields integrated into addresses
     delete finalData.street1;
-    delete finalData.street2;
+    // delete finalData.street2;
     delete finalData.city;
+    delete finalData.country;        // se agrego para anadir country
     delete finalData.zip_code;
 
+    console.log(finalData)
     try {
       const result = await fetchNow('users/', finalData);
 
@@ -123,6 +130,11 @@ const RegisterForm = ({ isLogin, setIsLogin, onClose }) => {
       console.error('Error registering:', err);
     }
   };
+
+  const selectedCountry =
+  dataCountry && formData.country
+    ? dataCountry.find((c) => c.id === Number(formData.country))
+    : null;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 mt-8">
@@ -244,11 +256,33 @@ const RegisterForm = ({ isLogin, setIsLogin, onClose }) => {
           </div>
 
           <div>
-            {loadingCities ? (
-              <p>Loading cities...</p>
-            ) : errorCities ? (
-              <p>Error loading cities: {errorCities}</p>
+            {loadingCountry ? (
+              <p>Loading contries and cities...</p>
+            ) : errorCountry ? (
+              <p>Error loading contries: {errorCountry}</p>
             ) : (
+              <select
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                className="block w-full border rounded px-3 py-2"
+              >
+                <option value="">Select a contry</option>
+                {dataCountry &&
+                      dataCountry.map((country) => (
+                      <option key={country.id} value={country.id}>
+                      {country.country_name}
+                    </option>
+                  ))}
+              </select>
+            )}
+            {errors.country && <p className="text-sm text-red-600 mt-1">{errors.country}</p>}
+          </div>
+          {dataCountry &&
+          formData.country &&
+          dataCountry.find((c) => c.id === Number(formData.country))?.cities
+            .length > 0 && (
+            <div className="mt-3">
               <select
                 name="city"
                 value={formData.city}
@@ -256,16 +290,19 @@ const RegisterForm = ({ isLogin, setIsLogin, onClose }) => {
                 className="block w-full border rounded px-3 py-2"
               >
                 <option value="">Select a city</option>
-                {data &&
-                  data.map((city) => (
+                {dataCountry
+                  .find((c) => c.id === Number(formData.country))
+                  .cities.map((city) => (
                     <option key={city.id} value={city.id}>
                       {city.city_name}
                     </option>
                   ))}
               </select>
-            )}
-            {errors.city && <p className="text-sm text-red-600 mt-1">{errors.city}</p>}
-          </div>
+              {errors.city && (
+                <p className="text-sm text-red-600 mt-1">{errors.city}</p>
+              )}
+            </div>
+          )}
 
           <div>
             <input

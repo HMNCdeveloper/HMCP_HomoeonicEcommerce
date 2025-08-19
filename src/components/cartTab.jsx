@@ -84,6 +84,7 @@ function CartTab({data}) {
           </div>
 
           <div className="grid grid-cols-1 gap-3">
+            {total > 0 && carts.length > 0 && (
             <PayPalScriptProvider options={{ "client-id": "AdmkwlUmuhvKwv6z02RQw8h5kDLkWSBHriSn-Txi8tyTnQuII13NqQkx2E4e1t9M3HPWMVTvJWhbfe0H" }}>
               <PayPalButtons
                 style={{ layout: "vertical" }}
@@ -153,7 +154,7 @@ function CartTab({data}) {
                   }
                 }} 
               />
-            </PayPalScriptProvider> 
+            </PayPalScriptProvider> ) }
           </div>
           
           <p className="mt-4 text-center text-sm text-gray-500">

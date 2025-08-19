@@ -42,14 +42,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // <-- estado loading
 
-  // useEffect(() => {
-  //   const storedUser = sessionStorage.getItem('InfoUser');
-  //   if (storedUser) {
-  //     setUser(JSON.parse(storedUser));
-  //   }
-  //   setLoading(false); // ya terminó de cargar
-  // }, []);
-
   useEffect(() => {
     try {
       const storedUser = sessionStorage.getItem('InfoUser');

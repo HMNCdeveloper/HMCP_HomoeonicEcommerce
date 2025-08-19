@@ -6,7 +6,7 @@ import { useFetch } from '../hooks/useFetch';
 
 function Profile() {
     const { user, loginUser } = useAuth();
-    const { data: cities = [], loading, error } = useFetch('cities/');
+    const { data: dataCountry = [], loading, error } = useFetch('countries/');
 
     const [activeTab, setActiveTab] = useState('profile');
 
@@ -49,7 +49,7 @@ function Profile() {
 
             {/* Tab Content */}
             <div className="mt-6">
-                {activeTab === 'profile' && <ProfileSection user={user} cities={cities} loginUser={loginUser} />}
+                {activeTab === 'profile' && <ProfileSection user={user} dataCountry={dataCountry} loginUser={loginUser} />}
                 {activeTab === 'security' && <SecuritySection />}
                 {activeTab === 'payments' && <PaymentHistorySection payments={payments} loading={loadingPayments} error={errorPayments} />}
             </div>
@@ -57,7 +57,7 @@ function Profile() {
     );
 }
 
-const ProfileSection = ({ user, cities, loginUser }) => {
+const ProfileSection = ({ user, dataCountry, loginUser }) => {
     const [form, setForm] = useState({
         first_name: '',
         last_name: '',
@@ -66,6 +66,7 @@ const ProfileSection = ({ user, cities, loginUser }) => {
         street: '',
         zip_code: '',
         city: '',
+        country: '',
     });
 
     const [original, setOriginal] = useState({});
@@ -85,6 +86,7 @@ const ProfileSection = ({ user, cities, loginUser }) => {
             street: address.street || '',
             zip_code: address.zip_code || '',
             city: address.city || '',
+            country: address.country || '',
         };
 
         setForm(newForm);
@@ -120,8 +122,13 @@ const ProfileSection = ({ user, cities, loginUser }) => {
                 body: JSON.stringify(payload),
             });
             if (!res.ok) throw new Error('Error updating field');
-            const updated = await res.json();
-            loginUser((prev) => ({ ...prev, ...updated }));
+             const updated = await res.json();
+            const newUser = {
+                ...user,
+                ...updated
+            };
+            loginUser(newUser);
+            alert('Info User updated successfully');
             setOriginal((prev) => ({ ...prev, [editingField]: form[editingField] }));
             setEditingField(null);
         } catch (error) {
@@ -142,6 +149,7 @@ const ProfileSection = ({ user, cities, loginUser }) => {
             street: original.street,
             zip_code: original.zip_code,
             city: original.city,
+            country: original.country,
         }));
         setEditingAddress(false);
     };
@@ -155,8 +163,11 @@ const ProfileSection = ({ user, cities, loginUser }) => {
                     street: form.street,
                     zip_code: form.zip_code,
                     city: form.city,
+                    country: form.country,
                 }],
             };
+            console.log('mensaje ', payload)
+            console.log('token', sessionStorage.getItem('access'))
             const URL = import.meta.env.VITE_API_HMCP + 'users/update_profile/';
             const res = await fetch(URL, {
                 method: 'PATCH',
@@ -169,12 +180,18 @@ const ProfileSection = ({ user, cities, loginUser }) => {
 
             if (!res.ok) throw new Error('Error updating address');
             const updated = await res.json();
-            loginUser((prev) => ({ ...prev, ...updated }));
+            const newUser = {
+                ...user,
+                addresses: updated.addresses
+            };
+            loginUser(newUser);
+            alert('Address updated successfully');
             setOriginal((prev) => ({
                 ...prev,
                 street: form.street,
                 zip_code: form.zip_code,
                 city: form.city,
+                country: form.country,
             }));
             setEditingAddress(false);
         } catch (error) {
@@ -185,7 +202,7 @@ const ProfileSection = ({ user, cities, loginUser }) => {
     };
 
     return (
-        <div>
+        <div className="mt-8 p-6 bg-white rounded-2xl shadow-lg">
             <h2 className="text-2xl font-bold text-[#1F7A8C] mb-4">Profile Information</h2>
 
             <div className="mb-8">
@@ -260,7 +277,7 @@ const ProfileSection = ({ user, cities, loginUser }) => {
                     />
                 </div>
 
-                <div className="mb-4">
+                {/* <div className="mb-4">
                     <label className="block text-xs font-medium text-gray-700">City</label>
                     <select
                         name="city"
@@ -276,8 +293,51 @@ const ProfileSection = ({ user, cities, loginUser }) => {
                             </option>
                         ))}
                     </select>
-                </div>
+                </div> */}
 
+<div className="mb-4">
+  <label className="block text-xs font-medium text-gray-700">Country</label>
+  <select
+    name="country"
+    value={form.country}
+    onChange={(e) => {
+      handleChange(e);
+      // Reset city al cambiar country
+      setForm(prev => ({ ...prev, city: '' }));
+    }}
+    disabled={!editingAddress}
+    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm bg-white"
+  >
+    <option value="">Select a country</option>
+    {dataCountry.map((country) => (
+      <option key={country.id} value={country.id}>
+        {country.country_name}
+      </option>
+    ))}
+  </select>
+</div>
+
+{form.country && dataCountry.find(c => c.id === Number(form.country))?.cities?.length > 0 && (
+  <div className="mb-4">
+    <label className="block text-xs font-medium text-gray-700">City</label>
+    <select
+      name="city"
+      value={form.city}
+      onChange={handleChange}
+      disabled={!editingAddress}
+      className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm bg-white"
+    >
+      <option value="">Select a city</option>
+      {dataCountry
+        .find(c => c.id === Number(form.country))
+        .cities.map(city => (
+          <option key={city.id} value={city.id}>
+            {city.city_name}
+          </option>
+        ))}
+    </select>
+  </div>
+)}
                 {!editingAddress ? (
                     <button
                         onClick={handleEditAddress}
@@ -306,6 +366,7 @@ const ProfileSection = ({ user, cities, loginUser }) => {
         </div>
     );
 };
+
 
 const SecuritySection = () => {
     const [showChangePass, setShowChangePass] = useState(false);
@@ -354,7 +415,7 @@ const SecuritySection = () => {
     };
 
     return (
-        <div>
+        <div className="mt-8 p-6 bg-white rounded-2xl shadow-lg"> 
             <h2 className="text-2xl font-bold text-[#1F7A8C] mb-4">Security</h2>
             {!showChangePass ? (
                 <button
@@ -410,7 +471,6 @@ const SecuritySection = () => {
 const PaymentHistorySection = ({ payments, loading, error }) => {
     const [expandedRow, setExpandedRow] = useState(null);
     const [orderDetails, setOrderDetails] = useState({});
-
     const { fetchNow } = useFetch(
         "orders/",  // base URL
         null,       // postData

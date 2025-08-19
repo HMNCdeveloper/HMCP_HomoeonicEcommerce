@@ -22,6 +22,8 @@ import { useAuth } from '../context/AuthContext';
 
       const userData = await res.json();
       sessionStorage.setItem('InfoUser', JSON.stringify(userData));
+
+      console.log(userData)
       return userData;
     } catch (err) {
       setError(err.message);
