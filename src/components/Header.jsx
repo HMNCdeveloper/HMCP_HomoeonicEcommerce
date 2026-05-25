@@ -77,16 +77,16 @@ function Header() {
       to: '/about-us',
       label: 'About Us'},
     { label: 'Contact', onClick: () => handleNavClick('contact') },
-    {
-      to: '#',
-      label: 'Login',
-      onClick: () => { setIsLoginView(true); setAuthModalOpen(true); }
-    },
-    {
-      to: '#',
-      label: 'Sign Up',
-      onClick: () => { setIsLoginView(false); setAuthModalOpen(true); }
-    },
+    // {
+    //   to: '#',
+    //   label: 'Login',
+    //   onClick: () => { setIsLoginView(true); setAuthModalOpen(true); }
+    // },
+    // {
+    //   to: '#',
+    //   label: 'Sign Up',
+    //   onClick: () => { setIsLoginView(false); setAuthModalOpen(true); }
+    // },
   ];
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -168,7 +168,7 @@ function Header() {
             </nav>
 
             {/* Carrito */}
-            <div className="relative group">
+            {/* <div className="relative group">
               <div className="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer relative" onClick={handleOpenCartTab}>
                 <img src={iconCart} alt="Cart" className="w-4 md:w-5" />
                 {totalQuantity > 0 && (
@@ -177,7 +177,7 @@ function Header() {
                   </span>
                 )}
               </div>
-            </div>
+            </div> */}
 
             {/* Menu Movil */}
             <button

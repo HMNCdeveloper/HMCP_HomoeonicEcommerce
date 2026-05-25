@@ -2,3 +2,11 @@
 html {
     scroll-behavior: smooth;
   }
+
+.product-description a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+.product-description a:hover {
+  color: #1d4ed8;
+}

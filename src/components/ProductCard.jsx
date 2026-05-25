@@ -31,7 +31,7 @@ function ProductCard({ product }) {
       {/* Image container */}
       <div className="relative mb-4 h-48 overflow-hidden rounded-lg bg-gray-100">
         <img 
-          src="/product.png" 
+          src={product.image}
           alt={product.product_name} 
           className="w-full h-full object-contain transition-transform duration-300 transform group-hover:scale-105"
         />
@@ -54,7 +54,7 @@ function ProductCard({ product }) {
         </div>
         
         {/* Add to cart button */}
-        <div className="mt-auto">
+        {/* <div className="mt-auto">
           <div className="flex justify-between items-center px-2">
             <span className="text-lg font-bold text-gray-800">${product.price}</span>
             <button 
@@ -65,7 +65,7 @@ function ProductCard({ product }) {
               <span>Add</span>
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

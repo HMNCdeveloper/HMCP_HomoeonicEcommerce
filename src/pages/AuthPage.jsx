@@ -1,5 +1,6 @@
 // export default AuthPage
 import AuthForm from '../components/AuthForm.jsx';
+import LoginImage from "../assets/Login.webp"
 
 function AuthPage({ isLogin, setIsLogin ,  onClose}) {
   return (
@@ -8,7 +9,7 @@ function AuthPage({ isLogin, setIsLogin ,  onClose}) {
       <div className='hidden lg:block relative h-full min-h-[300px]'>
         <img
           className='absolute inset-0 w-full h-full object-cover'
-          src='/Login.jpg'
+          src={LoginImage}
           alt='Login background'
         />
       </div>

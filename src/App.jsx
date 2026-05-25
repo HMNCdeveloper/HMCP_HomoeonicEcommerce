@@ -5,7 +5,7 @@ import Details from './pages/Details.jsx';
 import MainLayout from './layouts/MainLayout.jsx';
 import ScrollToTop from './components/common/ScrollToTop.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
-import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+import LegalPage from './pages/LegalPage.jsx';
 import TermsAndConditions from './pages/TermsAndConditions.jsx';
 import LegalNotice from './pages/LegalNotice.jsx';
 import Perfil from './components/profile.jsx';
@@ -14,10 +14,9 @@ import RecoveryPassword from './pages/RecoveryPassword.jsx';
 import ResetPassword from './pages/ResetPassword';
 import Testimonials from './pages/Testimonials.jsx';
 import AboutUs from './components/AboutUs.jsx';
-import { useFetch } from './hooks/useFetch.jsx';
+import productsData from './assets/products.json';
 
 function App() {
-  const {data}= useFetch('products/')
   return (
     <AuthProvider>
     <Router>
@@ -25,7 +24,7 @@ function App() {
       <Routes>
           <Route element={<MainLayout/>}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/product/:id" element={<Details productData={data} />} />
+          <Route path="/product/:id" element={<Details productData={productsData} />} />
           {/* <Route path="/profile" element={<Perfil />}  /> */}
           <Route path="/profile" element={
                 <PrivateRoute>
@@ -37,7 +36,7 @@ function App() {
           <Route path='/reset-password' element={<ResetPassword/>} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/about-us" element={<AboutUs/>} />
-          <Route path="/privacidad" element={<PrivacyPolicy />} />
+          <Route path="/privacidad" element={<LegalPage />} />
           <Route path="/terminos" element={<TermsAndConditions />} />
           <Route path="/aviso-legal" element={<LegalNotice />} />
           </Route>

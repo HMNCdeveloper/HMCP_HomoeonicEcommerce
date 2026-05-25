@@ -23,8 +23,8 @@ function Footer() {
       icon: <MdLocationOn className='text-white text-xl mt-1 mr-4 flex-shrink-0' />,
       content: (
         <a href='#' className='text-gray-400 font-bold hover:text-yellow-500 transition'>
-          Baja California,
-          Mexico
+          California,
+          U.S
         </a>
       ),
     },
@@ -68,13 +68,16 @@ function Footer() {
           {/* Empresa e íconos sociales */}
           <section className='md:col-span-2'>
             <div className='flex items-center mb-4'>
-              <FaBuilding className='text-3xl text-white mr-3' aria-hidden='true' />
-              <h2 className='text-xl font-bold'>HOMOEONIC</h2>
+              {/* <FaBuilding className='text-3xl text-white mr-3' aria-hidden='true' /> */}
+            
+              <img
+                      src="./favicon.ico"
+                      className="w-10  object-cover"
+                    />
+                <h2 className='text-xl font-bold'>HOMOEONIC</h2>
             </div>
             <p className='text-gray-400 mb-6'>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum accusantium officiis
-              est earum aspernatur inventore rem dolorem eveniet odio totam, tempore ex iusto iste
-              exercitationem incidunt quisquam numquam vero voluptatem?
+              We dedicate our business to the fabrication of radionic instruments, with the sole purpose of creating a new alternative to all who desire to engage in the fascinating world of self healing and agriculture applications. Through these wonderful equipments you could motivate and stimulate the potential of self healing and the natural regeneration through the renovation of bioenergetics memorial structure.
             </p>
             <nav aria-label='Social media links'>
               <ul className='flex space-x-4'>

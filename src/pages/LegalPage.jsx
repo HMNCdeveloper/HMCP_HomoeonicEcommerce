@@ -1,4 +1,4 @@
-function PrivacyPolicy() {
+function LegalPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 font-sans">
       {/* Encabezado con logo */}
@@ -20,12 +20,12 @@ function PrivacyPolicy() {
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
             We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the{' '}
-            <a href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/" 
+            {/* <a href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/" 
                target="_blank" 
                rel="noopener noreferrer"
                className="text-[#1F7A8C] hover:underline font-medium">
               Free Privacy Policy Generator
-            </a>.
+            </a>. */}
           </p>
         </div>
 
@@ -180,4 +180,4 @@ function PrivacyPolicy() {
   );
 }
 
-export default PrivacyPolicy;
+export default LegalPage;

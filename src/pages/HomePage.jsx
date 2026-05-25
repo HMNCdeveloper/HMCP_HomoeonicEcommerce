@@ -4,24 +4,18 @@ import ProductCatalog from './ProductsCatalog'
 import ContactUs from '../components/ContactUs'
 import Carousel from '../components/Carousel'
 import CartTab from '../components/CartTab';
-import { useFetch } from '../hooks/useFetch';
+import productsData from '../assets/products.json';
+
 function HomePage() {
-
-
-const { data, loading, error } = useFetch('products/');
   return (
     <>
       {/* <Header /> */}
       <Carousel interval={5000} />
       {/* <AboutUs /> */}
-      { data && (
-      <>
-        <ProductCatalog data={data} 
-                      loading={loading}
-                      error={error}/>
-        <CartTab data={data} />
-      </>
-      )}
+      <ProductCatalog data={productsData}
+                      loading={false}
+                      error={null}/>
+      <CartTab data={productsData} />
       
       {/* <Footer /> */}
       <ContactUs />

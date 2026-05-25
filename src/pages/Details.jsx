@@ -42,10 +42,6 @@ const Details = ({ productData }) => {
     );
   }
 
-  const featuresArray = details.product_details
-    ? details.product_details.split(',').map((f) => f.trim())
-    : [];
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
@@ -53,7 +49,7 @@ const Details = ({ productData }) => {
         <div className="px-6 py-4 bg-gradient-to-r from-blue-50 to-cyan-50">
           <h1 className="text-3xl font-bold text-gray-900">{details.product_name}</h1>
           <div className="flex items-center mt-1">
-            <span className="text-2xl font-bold text-blue-600">${details.price}</span>
+            {/* <span className="text-2xl font-bold text-blue-600">${details.price}</span> */}
             {/* {details.stock && details.stock > 0 ? (
               // <span className="ml-3 px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
               //   {details.stock} in stock
@@ -79,7 +75,7 @@ const Details = ({ productData }) => {
                 alt={details.product_name}
                 className="w-full h-full object-contain"
               />
-              {details.stock && details.stock > 0 && (
+              {/* {details.stock && details.stock > 0 && (
                 <div className="absolute top-3 right-3 flex items-center gap-1">
                   <FiMinus
                     size={24}
@@ -93,7 +89,7 @@ const Details = ({ productData }) => {
                     onClick={() => setQuantity((p) => p + 1)}
                   />
                 </div>
-              )}
+              )} */}
             </div>
 
             <div className="grid grid-cols-3 gap-3">
@@ -139,27 +135,13 @@ const Details = ({ productData }) => {
 
             <div className="mt-6">
               {tab === 'features' ? (
-                <ul className="space-y-3">
-                  {featuresArray.length > 0 ? (
-                    featuresArray.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <svg
-                          className="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))
-                  ) : (
-                    <p className="text-gray-700">No features available.</p>
-                  )}
-                </ul>
+                details.product_details ? (
+                  <div className="product-description text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: details.product_details }} />
+                ) : (
+                  <p className="text-gray-700">No features available.</p>
+                )
               ) : (
-                <p className="text-gray-700 leading-relaxed">{details.product_description}</p>
+                <div className="product-description text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: details.product_description || '' }} />
               )}
             </div>
 
@@ -171,15 +153,15 @@ const Details = ({ productData }) => {
                   className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors"
                 >
                   <FaShoppingCart />
-                  <span>Add to cart</span>
+                  <span>Buy</span>
                 </button>
-                <button className="flex-shrink-0 bg-gray-100 hover:bg-gray-200 p-3 rounded-lg transition-colors">
+                {/* <button className="flex-shrink-0 bg-gray-100 hover:bg-gray-200 p-3 rounded-lg transition-colors">
                   <FaShare className="text-gray-600" />
-                </button>
+                </button> */}
               </div>
 
               {/* Share options */}
-              <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+              {/* <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                 <span className="text-sm text-gray-500">Share:</span>
                 <div className="flex space-x-4">
                   <a href="#" className="text-blue-600 hover:text-blue-800">
@@ -192,7 +174,7 @@ const Details = ({ productData }) => {
                     <MdEmail size={20} />
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
