@@ -3,7 +3,7 @@ import ProductCatalog from './ProductsCatalog'
 // import Footer from '../components/Footer'
 import ContactUs from '../components/ContactUs'
 import Carousel from '../components/Carousel'
-import CartTab from '../components/CartTab';
+import CartTab from '../components/cartTab'
 import productsData from '../assets/products.json';
 
 function HomePage() {
